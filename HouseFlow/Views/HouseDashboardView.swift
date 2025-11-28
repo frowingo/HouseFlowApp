@@ -16,7 +16,9 @@ struct HouseDashboardView: View {
                         Spacer()
                         
                         Button(action: {
-                            appViewModel.logout()
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                appViewModel.logout()
+                            }
                         }) {
                             Image(systemName: "rectangle.portrait.and.arrow.right")
                                 .font(.system(size: 20))
@@ -33,7 +35,7 @@ struct HouseDashboardView: View {
                 .padding(.top, 20)
                 
                 // Today's Chores
-                TodaysChoresCard(chores: appViewModel.sampleChores)
+                TodaysChoresCard(chores: appViewModel.chores, appViewModel: appViewModel)
                     .padding(.horizontal, 24)
                 
                 // Weekly Leader & House Members Row
@@ -85,6 +87,7 @@ struct HouseDashboardView: View {
 
 struct TodaysChoresCard: View {
     let chores: [Chore]
+    let appViewModel: AppViewModel
     
     var todaysChores: [Chore] {
         chores.filter { $0.dueLabel == "Today" || $0.dueLabel == "Overdue" }
@@ -98,7 +101,7 @@ struct TodaysChoresCard: View {
             
             VStack(spacing: 12) {
                 ForEach(todaysChores) { chore in
-                    ChoreRow(chore: chore)
+                    ChoreRow(chore: chore, appViewModel: appViewModel)
                 }
             }
         }
@@ -111,6 +114,7 @@ struct TodaysChoresCard: View {
 
 struct ChoreRow: View {
     let chore: Chore
+    let appViewModel: AppViewModel
     
     var body: some View {
         HStack(spacing: 12) {
@@ -147,6 +151,10 @@ struct ChoreRow: View {
                 .cornerRadius(8)
         }
         .padding(.vertical, 4)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            appViewModel.toggleChoreCompletion(chore.id)
+        }
     }
     
     private var dueColor: Color {

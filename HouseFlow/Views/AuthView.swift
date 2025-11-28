@@ -49,7 +49,9 @@ struct AuthView: View {
             // Buttons
             VStack(spacing: 16) {
                 Button(action: {
-                    appViewModel.authenticate()
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        appViewModel.authenticate()
+                    }
                 }) {
                     Text("Login")
                         .font(.headline)
@@ -59,9 +61,13 @@ struct AuthView: View {
                         .background(Color.blue)
                         .cornerRadius(16)
                 }
+                .scaleEffect(0.98)
+                .animation(.easeInOut(duration: 0.1), value: false)
                 
                 Button(action: {
-                    appViewModel.authenticate()
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        appViewModel.authenticate()
+                    }
                 }) {
                     Text("Continue as Demo User")
                         .font(.headline)
@@ -71,6 +77,8 @@ struct AuthView: View {
                         .background(Color.blue.opacity(0.1))
                         .cornerRadius(16)
                 }
+                .scaleEffect(0.98)
+                .animation(.easeInOut(duration: 0.1), value: false)
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 50)

@@ -17,13 +17,14 @@ struct HouseSelectionView: View {
                     .multilineTextAlignment(.center)
             }
             .padding(.top, 60)
-            
-            Spacer()
+            .padding(.bottom, 40)
             
             // House Options
             VStack(spacing: 20) {
                 Button(action: {
-                    appViewModel.selectHouse(name: "Mahmut's House")
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        appViewModel.showCreateHouseScreen()
+                    }
                 }) {
                     HouseOptionCard(
                         title: "Create New House",
@@ -32,9 +33,13 @@ struct HouseSelectionView: View {
                         backgroundColor: .blue
                     )
                 }
+                .scaleEffect(0.98)
+                .animation(.easeInOut(duration: 0.1), value: false)
                 
                 Button(action: {
-                    appViewModel.selectHouse(name: "Mahmut's Flat")
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        appViewModel.selectHouse(name: "Mahmut's Flat")
+                    }
                 }) {
                     HouseOptionCard(
                         title: "Join Existing House",
@@ -43,10 +48,12 @@ struct HouseSelectionView: View {
                         backgroundColor: .green
                     )
                 }
+                .scaleEffect(0.98)
+                .animation(.easeInOut(duration: 0.1), value: false)
             }
             .padding(.horizontal, 24)
             
-            Spacer()
+            Spacer(minLength: 60)
         }
         .navigationBarHidden(true)
     }
@@ -59,31 +66,37 @@ struct HouseOptionCard: View {
     let backgroundColor: Color
     
     var body: some View {
-        HStack(spacing: 16) {
+        VStack(spacing: 24) {
+            // Icon
             Image(systemName: iconName)
-                .font(.system(size: 40))
-                .foregroundColor(backgroundColor)
+                .font(.system(size: 60, weight: .medium))
+                .foregroundColor(.white)
+                .frame(width: 100, height: 100)
+                .background(backgroundColor)
+                .clipShape(Circle())
+                .shadow(color: backgroundColor.opacity(0.3), radius: 10, x: 0, y: 5)
             
-            VStack(alignment: .leading, spacing: 4) {
+            // Content
+            VStack(spacing: 10) {
                 Text(title)
-                    .font(.headline)
+                    .font(.title3)
+                    .fontWeight(.bold)
                     .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
                 
                 Text(subtitle)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(3)
             }
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.secondary)
         }
-        .padding(20)
+        .padding(24)
+        .frame(maxWidth: .infinity)
+        .frame(height: 220)
         .background(Color(.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        .cornerRadius(24)
+        .shadow(color: Color.black.opacity(0.12), radius: 16, x: 0, y: 6)
     }
 }
 
