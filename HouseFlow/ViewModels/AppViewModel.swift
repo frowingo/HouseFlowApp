@@ -26,11 +26,11 @@ class AppViewModel: ObservableObject {
     
     var sampleChores: [Chore] {
         [
-            Chore(title: "Take out the trash", assignedTo: sampleUsers[0], dueLabel: "Today"),
-            Chore(title: "Clean kitchen counter", assignedTo: sampleUsers[1], dueLabel: "Today"),
-            Chore(title: "Vacuum living room", assignedTo: sampleUsers[2], dueLabel: "Overdue"),
-            Chore(title: "Clean bathroom", assignedTo: sampleUsers[3], dueLabel: "This week"),
-            Chore(title: "Do laundry", assignedTo: sampleUsers[0], dueLabel: "Today", isDone: true)
+            Chore(title: "Take out the trash", description: "Empty all trash bins and take bags to the dumpster", assignedTo: sampleUsers[0], dueLabel: "Today"),
+            Chore(title: "Clean kitchen counter", description: "Wipe down all surfaces, clean sink and organize items", assignedTo: sampleUsers[1], dueLabel: "Today"),
+            Chore(title: "Vacuum living room", description: "Vacuum carpet and clean under furniture", assignedTo: sampleUsers[2], dueLabel: "Overdue"),
+            Chore(title: "Clean bathroom", description: "Clean toilet, shower, sink and mirror", assignedTo: sampleUsers[3], dueLabel: "This week"),
+            Chore(title: "Do laundry", description: "Wash, dry and fold clothes", assignedTo: sampleUsers[0], dueLabel: "Today", isDone: true)
         ]
     }
     
@@ -108,11 +108,11 @@ class AppViewModel: ObservableObject {
     
     private func initializeChores() {
         chores = [
-            Chore(title: "Take out the trash", assignedTo: sampleUsers[0], dueLabel: "Today"),
-            Chore(title: "Clean kitchen counter", assignedTo: sampleUsers[1], dueLabel: "Today"),
-            Chore(title: "Vacuum living room", assignedTo: sampleUsers[2], dueLabel: "Overdue"),
-            Chore(title: "Clean bathroom", assignedTo: sampleUsers[3], dueLabel: "This week"),
-            Chore(title: "Do laundry", assignedTo: sampleUsers[0], dueLabel: "Today", isDone: true)
+            Chore(title: "Take out the trash", description: "Empty all trash bins and take bags to the dumpster", assignedTo: sampleUsers[0], dueLabel: "Today"),
+            Chore(title: "Clean kitchen counter", description: "Wipe down all surfaces, clean sink and organize items", assignedTo: sampleUsers[1], dueLabel: "Today"),
+            Chore(title: "Vacuum living room", description: "Vacuum carpet and clean under furniture", assignedTo: sampleUsers[2], dueLabel: "Overdue"),
+            Chore(title: "Clean bathroom", description: "Clean toilet, shower, sink and mirror", assignedTo: sampleUsers[3], dueLabel: "This week"),
+            Chore(title: "Do laundry", description: "Wash, dry and fold clothes", assignedTo: sampleUsers[0], dueLabel: "Today", isDone: true)
         ]
     }
     
@@ -121,6 +121,7 @@ class AppViewModel: ObservableObject {
             let currentChore = chores[index]
             var newChore = Chore(
                 title: currentChore.title,
+                description: currentChore.description,
                 assignedTo: currentChore.assignedTo,
                 dueLabel: currentChore.dueLabel,
                 isDone: !currentChore.isDone
